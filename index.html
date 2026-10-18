@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>25:00 - 포모도로 타이머</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- 구글 폰트: 모던하고 깔끔한 Pretendard/Inter 계열 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="mode-focus">
+  <div class="app-container">
+    <!-- 상단 헤더: 앱 타이틀 & 세션 카운터 -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🍅</span>
+        <span class="logo-text">Pomodoro Flow</span>
+      </div>
+
+      <div class="session-badge" title="완료한 집중 세션 수">
+        <span class="session-icon">🏆</span>
+        <span>완료 세션:</span>
+        <strong id="session-count">0</strong>
+        <button id="reset-session-btn" class="icon-btn-subtle" title="세션 카운터 초기화">↺</button>
+      </div>
+    </header>
+
+    <!-- 중앙 타이머 카드 -->
+    <main class="timer-card">
+      <!-- 모드 인디케이터 배지 -->
+      <div class="mode-badge" id="mode-badge">
+        <span class="mode-dot"></span>
+        <span id="mode-text">집중 시간 (Focus)</span>
+      </div>
+
+      <!-- 원형 진행 링 및 시간 디스플레이 -->
+      <div class="timer-visual-container">
+        <svg class="progress-ring" viewBox="0 0 320 320">
+          <!-- 배경 트랙 원 -->
+          <circle
+            class="progress-ring-bg"
+            cx="160"
+            cy="160"
+            r="140"
+          />
+          <!-- 동적 진행 원 -->
+          <circle
+            id="progress-ring-indicator"
+            class="progress-ring-indicator"
+            cx="160"
+            cy="160"
+            r="140"
+          />
+        </svg>
+
+        <!-- 원 중앙 시간 정보 -->
+        <div class="timer-center-content">
+          <div class="time-display" id="time-display">25:00</div>
+          <div class="time-subtext" id="time-subtext">몰입할 준비가 되셨나요?</div>
+        </div>
+      </div>
+
+      <!-- 타이머 컨트롤 버튼 (시작, 일시정지, 초기화) -->
+      <div class="control-actions">
+        <button id="start-btn" class="btn btn-primary" title="타이머 시작">
+          <span class="btn-icon">▶</span> 시작
+        </button>
+        <button id="pause-btn" class="btn btn-secondary" title="타이머 일시정지" disabled>
+          <span class="btn-icon">⏸</span> 일시정지
+        </button>
+        <button id="reset-btn" class="btn btn-secondary" title="타이머 초기화">
+          <span class="btn-icon">↺</span> 초기화
+        </button>
+      </div>
+    </main>
+
+    <!-- 백색소음 및 오디오 제어 패널 -->
+    <section class="ambient-panel">
+      <div class="panel-header">
+        <span class="panel-title">🎧 집중을 돕는 백색소음</span>
+        <div class="audio-controls">
+          <button id="mute-btn" class="mute-btn" title="음소거 토글">
+            <span id="mute-icon">🔊</span>
+          </button>
+          <div class="slider-wrapper">
+            <input type="range" id="volume-slider" min="0" max="100" value="50" aria-label="음량 조절">
+            <span id="volume-label" class="volume-label">50%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 백색소음 선택 버튼 그룹 -->
+      <div class="ambient-options" role="radiogroup" aria-label="백색소음 선택">
+        <button class="ambient-btn active" data-sound="off">
+          <span class="ambient-emoji">🔇</span>
+          <span class="ambient-name">끄기</span>
+        </button>
+        <button class="ambient-btn" data-sound="waves">
+          <span class="ambient-emoji">🌊</span>
+          <span class="ambient-name">파도 소리</span>
+        </button>
+        <button class="ambient-btn" data-sound="rain">
+          <span class="ambient-emoji">🌧️</span>
+          <span class="ambient-name">빗소리</span>
+        </button>
+        <button class="ambient-btn" data-sound="birds">
+          <span class="ambient-emoji">🐦</span>
+          <span class="ambient-name">새소리</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 푸터 가이드 -->
+    <footer class="app-footer">
+      <p>25분 집중 후 5분 휴식이 자동으로 전환됩니다. 끝날 때 알림음이 울립니다.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
